@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Entropy: Why the Arrow of Time Points Forward — DJ{% endblock %}
+
+{% block header %}portfolio{% endblock %}
+
+{% block content %}
+<p><a href="{{ back_link | default(value='/') }}">← {{ back_text | default(value='home') }}</a></p>
+<h2>Entropy: Why the Arrow of Time Points Forward</h2>
+<p>Physics doesn’t care if time runs forward or backward in its equations—except when it comes to entropy. The second
+    law of thermodynamics says that in a closed system, entropy tends to increase. That gives us a direction for time:
+    things tend to get more disordered.</p>
+<p>Why was the past more ordered? That’s still an open question, tied to the initial conditions of the universe. What we
+    do know is that every time you mix cream into coffee or break an egg, you’re watching entropy increase. The universe
+    is slowly winding toward equilibrium.</p>
+{% endblock %}

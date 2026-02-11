@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}What Happens at the Edge of a Black Hole — DJ{% endblock %}
+
+{% block header %}portfolio{% endblock %}
+
+{% block content %}
+<p><a href="{{ back_link | default(value='/') }}">← {{ back_text | default(value='home') }}</a></p>
+<h2>What Happens at the Edge of a Black Hole</h2>
+<figure class="article-image article-image-bw">
+    <img src="/static/images/blackhole.jpg" alt="Black hole" width="600" height="400">
+    <figcaption>Black hole visualization (<a
+            href="https://www.science.org/content/article/here-s-what-scientists-think-black-hole-looks" target="_blank"
+            rel="noopener noreferrer">Science</a>)</figcaption>
+</figure>
+<p>Black holes are regions where gravity is so strong that nothing, not even light, can escape once it crosses the event
+    horizon. General relativity describes them as bends in spacetime so extreme that time and space swap roles inside.
+</p>
+<p>Near the horizon, strange effects appear: time dilation, tidal forces, and—when quantum mechanics is included—Hawking
+    radiation. We’re still trying to reconcile how information behaves when it falls in. Black holes push our best
+    theories to their limits.</p>
+{% endblock %}

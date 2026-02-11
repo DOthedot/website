@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}The Weird World of Quantum Superposition — DJ{% endblock %}
+
+{% block header %}portfolio{% endblock %}
+
+{% block content %}
+<p><a href="{{ back_link | default(value='/') }}">← {{ back_text | default(value='home') }}</a></p>
+<h2>The Weird World of Quantum Superposition</h2>
+<p>In the quantum realm, a particle can be in many states at once until you measure it. An electron isn’t “here” or
+    “there”; it’s in a superposition of possibilities described by a wavefunction. The act of measurement is what forces
+    one outcome to appear.</p>
+<p>This isn’t a lack of knowledge—it’s how nature behaves. Experiments with single particles going through two slits,
+    and quantum computers using qubits, all rely on this. The world at the smallest scale is probabilistic, and that’s
+    both unsettling and beautiful.</p>
+{% endblock %}

@@ -1,6 +1,6 @@
 # Portfolio Website
 
-A minimalist portfolio website built with Python and Flask featuring monospace fonts and clean design.
+A minimalist portfolio website with a Rust backend (Axum + Tera), monospace fonts, and clean design.
 
 ## Features
 
@@ -13,28 +13,33 @@ A minimalist portfolio website built with Python and Flask featuring monospace f
 
 ## Setup
 
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+1. Install [Rust](https://rustup.rs/) if you haven't already.
 
 2. Run the application:
 ```bash
-python main.py
+cargo run
 ```
 
-3. Open your browser and navigate to `http://localhost:5000`
+3. Open your browser and navigate to `http:/DOthedotlocalhost:5000`
+
+To use a different port:
+```bash
+PORT=8080 cargo run
+```
 
 ## Project Structure
 
 ```
 website/
-├── main.py              # Flask application
-├── requirements.txt     # Python dependencies
-├── templates/           # HTML templates
+├── Cargo.toml          # Rust dependencies
+├── src/
+│   └── main.rs         # Axum server & routes
+├── templates/          # HTML templates (Tera/Jinja2-like)
 │   ├── base.html       # Base template
 │   ├── index.html      # Home page
-│   └── about.html      # About page
+│   ├── about.html      # About page
+│   ├── projects.html   # Projects page
+│   └── literary.html   # Literary works
 └── static/
     └── css/
         └── style.css   # Stylesheet
@@ -44,9 +49,8 @@ website/
 
 - Edit templates in `templates/` directory
 - Modify styles in `static/css/style.css`
-- Add new routes in `main.py`
+- Add new routes in `src/main.rs`
 
 ## License
 
 MIT
-

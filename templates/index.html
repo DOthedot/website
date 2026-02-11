@@ -6,35 +6,50 @@
 
 {% block content %}
 <h2>hello</h2>
-<p>Hello Comrade's!<br>My name is dhananjay ojha and i write about philosophy, physics and technology. Other than that i exploit my physical powers in leisure time, if you are not sure about what's that lets "ROLL"!!!</p>
+<p>Hello Comrade's!<br>My name is dhananjay ojha and i write about philosophy, physics and technology. Other than that i
+    exploit my physical powers in leisure time as a mma enthusiast, if you are not sure about what's that lets "ROLL"!!!
+</p>
 
-<h2>skills</h2>
-<p>I work with:</p>
-<ul>
-    <li>Python & Data Engineering</li>
-    <li>Apache Spark & Kafka</li>
-    <li>Apache Airflow</li>
-    <li>Cassandra & Databases</li>
-    <li>Flask & Web Development</li>
-    <li>Cloud Infrastructure</li>
+<h2>blogs</h2>
+<ul class="blog-list">
+    <li><a href="/blog/relativity">Why Time Slows Down When You Move Fast</a></li>
+    <li><a href="/blog/quantum">The Weird World of Quantum Superposition</a></li>
+    <li><a href="/blog/entropy">Entropy: Why the Arrow of Time Points Forward</a></li>
+    <li><a href="/blog/black-holes">What Happens at the Edge of a Black Hole</a></li>
 </ul>
 
-<h2>projects</h2>
-<p>Some of my work includes:</p>
-<ul>
-    <li>Real-time data streaming pipelines with Kafka and Spark</li>
-    <li>ETL workflows orchestrated with Apache Airflow</li>
-    <li>Data analytics and processing systems</li>
-    <li>Web applications and APIs</li>
-</ul>
+<h2>quotes</h2>
+<div class="quotes-block">
+    <p id="quote-text" class="quote-text">Click the dice to roll a quote.</p>
+    <button type="button" id="dice-btn" class="dice-btn" title="Roll a random quote">🎲</button>
+</div>
 
-<h2>interests</h2>
-<p>When i'm not coding, i explore:</p>
-<ul>
-    <li>Philosophy and critical thinking</li>
-    <li>Physics and the nature of reality</li>
-    <li>Technology and its impact on society</li>
-    <li>Physical activities and movement</li>
-</ul>
+<script>
+    (function () {
+        var quotes = [
+            "The only way to do great work is to love what you do. — Steve Jobs",
+            "Imagination is more important than knowledge. — Albert Einstein",
+            "The unexamined life is not worth living. — Socrates",
+            "We are what we repeatedly do. Excellence, then, is not an act, but a habit. — Aristotle",
+            "In the middle of difficulty lies opportunity. — Albert Einstein",
+            "The only true wisdom is in knowing you know nothing. — Socrates",
+            "Life can only be understood backwards; but it must be lived forwards. — Søren Kierkegaard",
+            "I have no special talent. I am only passionately curious. — Albert Einstein",
+            "Reality is merely an illusion, albeit a very persistent one. — Albert Einstein",
+            "The important thing is not to stop questioning. — Albert Einstein",
+            "There is no absolute truth, only relative truth. — Nietzsche",
+            "Nobody ever figures out what life is all about, and it doesn't matter. Explore the world. Nearly everything is really interesting if you go into it deeply enough. - Richard Feynman",
+            "there is nothing outside of yourself that can ever enable you to get better, stronger, richer, quicker, or smarter. Everything is within. Everything exists. Seek nothing outside of yourself. -Miyamoto Musashi, The Book of Five Rings",
+            "Today is victory over yourself of yesterday; tomorrow is your victory over lesser men. -Miyamoto Musashi, The Book of Five Rings",
+            "You must understand that there is more than one path to the top of the mountain. -Miyamoto Musashi, The Book of Five Rings"
+        ];
+        var el = document.getElementById('quote-text');
+        var btn = document.getElementById('dice-btn');
+        if (el && btn) {
+            btn.addEventListener('click', function () {
+                el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+            });
+        }
+    })();
+</script>
 {% endblock %}
-
