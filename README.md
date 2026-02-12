@@ -1,56 +1,87 @@
 # Portfolio Website
 
-A minimalist portfolio website with a Rust backend (Axum + Tera), monospace fonts, and clean design.
+A minimalist, high-performance portfolio website built with Rust (Axum + Tera), featuring monospace typography and a clean, distraction-free design.
+
+## Tech Stack
+
+- **Backend**: Rust with [Axum](https://github.com/tokio-rs/axum) web framework
+- **Templating**: [Tera](https://tera.rs/) (Jinja2-like templating engine)
+- **Static Files**: Tower HTTP for serving assets
 
 ## Features
 
 - Clean, monospace typography
-- Minimalist design principles
-- Simple HTML structure
-- Responsive layout
-- Portfolio-focused content
-- Easy to customize
+- Minimalist design with focus on content
+- Fully responsive layout
+- Portfolio project showcase
+- Literary works section
+- SEO-friendly static pages
 
-## Setup
+## Getting Started
 
-1. Install [Rust](https://rustup.rs/) if you haven't already.
+### Prerequisites
 
-2. Run the application:
+- [Rust](https://rustup.rs/) (1.70+)
+
+### Development
+
 ```bash
+# Run the development server
 cargo run
 ```
 
-3. Open your browser and navigate to `http:/DOthedotlocalhost:5000`
+The server will start at `http://localhost:5000`. Use a custom port:
 
-To use a different port:
 ```bash
 PORT=8080 cargo run
 ```
+
+### Production Build
+
+```bash
+# Build optimized release
+cargo build --release
+
+# Run the production binary
+./target/release/website
+```
+
+## Deployment
+
+### Vercel
+
+Deploys automatically via `vercel.json` configuration.
 
 ## Project Structure
 
 ```
 website/
 ├── Cargo.toml          # Rust dependencies
+├── Dockerfile          # Docker configuration
+├── vercel.json         # Vercel deployment config
 ├── src/
 │   └── main.rs         # Axum server & routes
-├── templates/          # HTML templates (Tera/Jinja2-like)
-│   ├── base.html       # Base template
+├── templates/          # Tera HTML templates
+│   ├── base.html       # Base layout
 │   ├── index.html      # Home page
 │   ├── about.html      # About page
-│   ├── projects.html   # Projects page
+│   ├── projects.html   # Projects showcase
 │   └── literary.html   # Literary works
 └── static/
-    └── css/
-        └── style.css   # Stylesheet
+    ├── css/
+    │   └── style.css   # Stylesheet
+    ├── images/
+    └── fonts/
 ```
 
 ## Customization
 
-- Edit templates in `templates/` directory
-- Modify styles in `static/css/style.css`
-- Add new routes in `src/main.rs`
+| Section | File |
+|---------|------|
+| Page content | Edit templates in `templates/` |
+| Styling | Modify `static/css/style.css` |
+| Routes | Add new routes in `src/main.rs` |
 
 ## License
 
-MIT
+MIT License - see [LICENSE](LICENSE) for details.
