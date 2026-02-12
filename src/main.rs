@@ -1,6 +1,3 @@
-//! Minimalist Website - Rust backend
-
-
 use axum::{
     extract::{Query, State, Form},
     response::{Html, IntoResponse, Response},
@@ -12,6 +9,7 @@ use std::net::SocketAddr;
 use std::sync::Arc;
 use tera::Tera;
 use tower_http::services::ServeDir;
+
 
 #[derive(Deserialize)]
 struct BlogQuery {
@@ -31,6 +29,8 @@ struct AppState {
     tera: Arc<Tera>,
 }
 
+
+
 #[tokio::main]
 async fn main() {
     let templates_path = concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*");
@@ -44,6 +44,7 @@ async fn main() {
 
     let app = Router::new()
         .route("/", get(index))
+        .route("/_health", get(health_check))
         .route("/projects", get(projects))
         .route("/about", get(about))
         .route("/thought-for-century", get(thought_century))
@@ -106,6 +107,10 @@ fn render(state: &AppState, template: &str) -> Result<Response, tera::Error> {
     let ctx = tera::Context::new();
     let html = state.tera.render(template, &ctx)?;
     Ok(Html(html).into_response())
+}
+
+async fn health_check() -> &'static str {
+    "OK"
 }
 
 async fn index(State(state): State<AppState>) -> Response {
