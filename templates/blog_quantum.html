@@ -5,7 +5,16 @@
 {% block header %}portfolio{% endblock %}
 
 {% block content %}
-<p><a href="{{ back_link | default(value='/') }}">← {{ back_text | default(value='home') }}</a></p>
+<p><a href="/" id="back-link">← <span id="back-text">home</span></a></p>
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'literary') {
+        document.getElementById('back-link').href = '/literary';
+        document.getElementById('back-text').textContent = 'literary works';
+    }
+})();
+</script>
 <h2>The Weird World of Quantum Superposition</h2>
 <p>In the quantum realm, a particle can be in many states at once until you measure it. An electron isn’t “here” or
     “there”; it’s in a superposition of possibilities described by a wavefunction. The act of measurement is what forces

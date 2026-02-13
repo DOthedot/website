@@ -41,6 +41,12 @@ instance/
 .DS_Store
 Thumbs.db
 
+# Node
+node_modules/
+
+# Build output
+out/
+
 # Environment variables
 .env
 .env.local

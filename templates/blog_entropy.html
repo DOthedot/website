@@ -5,7 +5,16 @@
 {% block header %}portfolio{% endblock %}
 
 {% block content %}
-<p><a href="{{ back_link | default(value='/') }}">← {{ back_text | default(value='home') }}</a></p>
+<p><a href="/" id="back-link">← <span id="back-text">home</span></a></p>
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'literary') {
+        document.getElementById('back-link').href = '/literary';
+        document.getElementById('back-text').textContent = 'literary works';
+    }
+})();
+</script>
 <h2>Entropy: Why the Arrow of Time Points Forward</h2>
 <p>Physics doesn’t care if time runs forward or backward in its equations—except when it comes to entropy. The second
     law of thermodynamics says that in a closed system, entropy tends to increase. That gives us a direction for time:

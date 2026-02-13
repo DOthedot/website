@@ -10,7 +10,7 @@
 
 <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
 
-<form action="/contact" method="post" style="max-width: 500px; margin-top: 2rem;">
+<form id="contact-form" style="max-width: 500px; margin-top: 2rem;">
     <div style="margin-bottom: 1rem;">
         <label for="name" style="display: block; margin-bottom: 0.5rem;">Name</label>
         <input type="text" id="name" name="name" required placeholder="name , what is yours padawan ?"
@@ -29,7 +29,7 @@
             style="width: 100%; padding: 0.5rem; background: transparent; border: 1px solid currentColor; color: inherit; font-family: inherit;"></textarea>
     </div>
 
-    <button type="submit"
+    <button type="submit" id="submit-btn"
         style="padding: 0.5rem 1.5rem; background: transparent; border: 1px solid currentColor; color: inherit; cursor: pointer; font-family: inherit; transition: all 0.2s;">Send
         Message →</button>
 </form>
@@ -38,8 +38,40 @@
         href="https://docs.google.com/forms/d/18tnq3-m7Lhc3tnff6FALLVP_hYZzBsjdM8p6zkfIc2g/viewform" target="_blank"
         style="text-decoration: none; color: inherit;">not working ? send here instead ✔</a></p>
 
-{% if success %}
-<p style="margin-top: 1rem; color: green;">Message sent successfully! I'll get back to you soon.</p>
-{% endif %}
+<p id="form-success" style="margin-top: 1rem; color: green; display: none;">Message sent successfully! I'll get back to you soon.</p>
+<p id="form-error" style="margin-top: 1rem; color: red; display: none;">Something went wrong. Please try the Google Form link above.</p>
+
+<script>
+(function() {
+    var form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var btn = document.getElementById('submit-btn');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+
+        var data = new URLSearchParams();
+        data.append('entry.1042344079', form.name.value);
+        data.append('entry.979343976', form.email.value);
+        data.append('entry.1793433401', form.message.value);
+
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjjd0slqYgPp5lssr1wdYn0_Ryr-ZRS07vaGvV621HSJg0_g/formResponse', {
+            method: 'POST',
+            body: data,
+            mode: 'no-cors'
+        }).then(function() {
+            document.getElementById('form-success').style.display = 'block';
+            document.getElementById('form-error').style.display = 'none';
+            form.reset();
+            btn.textContent = 'Send Message →';
+            btn.disabled = false;
+        }).catch(function() {
+            document.getElementById('form-error').style.display = 'block';
+            btn.textContent = 'Send Message →';
+            btn.disabled = false;
+        });
+    });
+})();
+</script>
 
 {% endblock %}

@@ -5,7 +5,16 @@
 {% block header %}portfolio{% endblock %}
 
 {% block content %}
-<p><a href="{{ back_link | default(value='/') }}">← {{ back_text | default(value='home') }}</a></p>
+<p><a href="/" id="back-link">← <span id="back-text">home</span></a></p>
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'literary') {
+        document.getElementById('back-link').href = '/literary';
+        document.getElementById('back-text').textContent = 'literary works';
+    }
+})();
+</script>
 <h2>What Happens at the Edge of a Black Hole</h2>
 <figure class="article-image article-image-bw">
     <img src="/static/images/blackhole.jpg" alt="Black hole" width="600" height="400">
