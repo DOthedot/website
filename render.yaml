@@ -1,0 +1,11 @@
+# Render configuration
+services:
+  - type: web
+    name: portfolio-website
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /_health
+    envVars:
+      - key: PORT
+        value: 10000

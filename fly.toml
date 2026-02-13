@@ -1,0 +1,28 @@
+# Fly.io configuration for Rust/Axum deployment
+app = "your-app-name"  # Change this to your desired app name
+primary_region = "iad"  # Change to your preferred region (iad = US East)
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/_health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
