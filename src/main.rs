@@ -59,6 +59,7 @@ async fn main() {
         .route("/blog/entropy", get(blog_entropy))
         .route("/blog/black-holes", get(blog_black_holes))
         .route("/blog/consciousness", get(blog_consciousness))
+        .route("/blog/control", get(blog_control))
         .nest_service("/static", static_service)
         .with_state(state);
 
@@ -268,6 +269,20 @@ async fn blog_consciousness(State(state): State<AppState>, Query(params): Query<
     ctx.insert("back_text", back_text);
 
     let html = state.tera.render("blog_consciousness.html", &ctx)
+        .unwrap_or_else(|e| e.to_string());
+    Html(html).into_response()
+}
+
+async fn blog_control(State(state): State<AppState>, Query(params): Query<BlogQuery>) -> Response {
+    let mut ctx = tera::Context::new();
+    let (back_link, back_text) = match params.from.as_deref() {
+        Some("literary") => ("/literary", "literary works"),
+        _ => ("/", "home"),
+    };
+    ctx.insert("back_link", back_link);
+    ctx.insert("back_text", back_text);
+
+    let html = state.tera.render("blog_control.html", &ctx)
         .unwrap_or_else(|e| e.to_string());
     Html(html).into_response()
 }
