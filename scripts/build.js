@@ -27,6 +27,7 @@ const pages = [
   { template: 'blog_entropy.html', output: 'blog/entropy.html' },
   { template: 'blog_blackholes.html', output: 'blog/black-holes.html' },
   { template: 'blog_consciousness.html', output: 'blog/consciousness.html' },
+  { template: 'blog_control.html', output: 'blog/control.html' },
 ];
 
 // Clean and recreate output directory
