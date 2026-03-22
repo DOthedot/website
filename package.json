@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "dev": "node scripts/build.js && npx serve out"
   },
   "devDependencies": {
     "nunjucks": "^3.2.4"

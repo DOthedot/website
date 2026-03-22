@@ -1,157 +1,145 @@
-# Portfolio Website
+# DOthedot — Personal Website
 
-A minimalist, high-performance portfolio website built with Rust (Axum + Tera), featuring monospace typography and a clean, distraction-free design.
+A minimalist personal portfolio and writing space. Built with a focus on content over complexity — clean monospace typography, zero JavaScript frameworks, and a static build pipeline that deploys in seconds.
+
+**Live site**: [dothedot.vercel.app](https://dothedot.vercel.app)
+
+---
+
+## Overview
+
+The site is a collection of three things:
+
+- **Projects** — engineering work across data pipelines, AI systems, and tooling
+- **Blog** — long-form writing on physics, philosophy, and ideas
+- **Literary works** — poems and short pieces
+
+Pages are authored as HTML templates, rendered at build time into static files, and served via Vercel's CDN. No server, no database, no runtime dependencies.
+
+---
 
 ## Tech Stack
 
-- **Backend**: Rust with [Axum](https://github.com/tokio-rs/axum) web framework
-- **Templating**: [Tera](https://tera.rs/) (Jinja2-like templating engine)
-- **Static Files**: Tower HTTP for serving assets
+| Layer | Technology |
+| --- | --- |
+| Templating | [Nunjucks](https://mozilla.github.io/nunjucks/) |
+| Build | Node.js (`scripts/build.js`) |
+| Hosting | [Vercel](https://vercel.com) (static) |
+| Styling | Vanilla CSS, monospace typography |
 
-## Features
+---
 
-- Clean, monospace typography
-- Minimalist design with focus on content
-- Fully responsive layout
-- Portfolio project showcase
-- Literary works section
-- SEO-friendly static pages
+## Project Structure
+
+```text
+website/
+├── templates/              # Nunjucks HTML templates
+│   ├── base.html           # Base layout (nav, footer, head)
+│   ├── index.html          # Home page
+│   ├── about.html          # About page
+│   ├── projects.html       # Projects showcase
+│   ├── contact.html        # Contact form
+│   ├── literary.html       # Literary works index
+│   ├── blog_*.html         # Blog articles
+│   └── *_poem.html         # Poems
+├── static/
+│   ├── css/style.css       # Stylesheet
+│   ├── images/             # Article and page images
+│   └── fonts/              # Local font files
+├── scripts/
+│   └── build.js            # Build script — renders templates → out/
+├── out/                    # Generated static site (Vercel serves this)
+├── package.json
+└── vercel.json             # Vercel config
+```
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- [Rust](https://rustup.rs/) (1.70+)
+- Node.js 18+
 
-### Development
-
-```bash
-# Run the development server
-cargo run
-```
-
-The server will start at `http://localhost:5000`. Use a custom port:
+### Install dependencies
 
 ```bash
-PORT=8080 cargo run
+npm install
 ```
 
-### Production Build
+### Run locally
 
 ```bash
-# Build optimized release
-cargo build --release
-
-# Run the production binary
-./target/release/website
+npm run dev
 ```
 
-### Docker (Local Testing)
+Builds the site and starts a local server at `http://localhost:3000`.
 
-Test the production Docker image locally:
+### Build only
 
 ```bash
-# Build the image
-docker build -t website .
-
-# Run the container
-docker run -p 5000:5000 website
-
-# Or with custom port
-docker run -p 8080:8080 -e PORT=8080 website
+npm run build
 ```
 
-Visit `http://localhost:5000` (or your custom port).
+Renders all templates into `out/`. The `out/` directory is what Vercel deploys.
+
+---
+
+## Adding Content
+
+### New blog post
+
+1. Create `templates/blog_<slug>.html` extending `base.html`
+2. Add an entry to the `pages` array in `scripts/build.js`
+3. Add a route to `src/main.rs` *(if running the server locally)*
+4. Link it from `templates/index.html` and/or `templates/literary.html`
+
+### New poem
+
+Same steps as a blog post — use an existing poem template as reference.
+
+### New project
+
+Edit `templates/projects.html` directly.
+
+---
 
 ## Deployment
 
-### Recommended Platforms for Rust/Axum
+The site deploys automatically on every push to `main` via Vercel.
 
-**Important**: Vercel has deprecated Docker support and is optimized for serverless/static sites. For Rust applications, use these platforms instead:
-
-#### Fly.io (Recommended)
-
-Best for Rust applications with automatic scaling and global deployment:
+**Manual deploy:**
 
 ```bash
-# Install Fly CLI
-curl -L https://fly.io/install.sh | sh
-
-# Login and launch
-flyctl auth login
-flyctl launch  # Follow prompts (it will detect fly.toml)
-flyctl deploy  # Deploy your app
-
-# Open your app
-flyctl open
+npm run build
+vercel --prod
 ```
 
-**Cost**: Free tier includes 3 shared-cpu VMs with 256MB RAM each.
+Vercel config (`vercel.json`):
 
-#### Railway
-
-Simple deployment with GitHub integration:
-
-```bash
-# Install Railway CLI (optional - can also use web UI)
-npm i -g @railway/cli
-
-# Login and deploy
-railway login
-railway init
-railway up
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "out",
+  "cleanUrls": true
+}
 ```
 
-Or use the [Railway web dashboard](https://railway.app) to deploy directly from GitHub.
+`cleanUrls: true` strips `.html` extensions so `/about` works instead of `/about.html`.
 
-**Cost**: $5 free credit/month, then pay-as-you-go.
-
-#### Render
-
-Deploy with one click from GitHub:
-
-1. Push your code to GitHub
-2. Go to [render.com](https://render.com) and create a new Web Service
-3. Connect your repository
-4. Render will auto-detect the `render.yaml` configuration
-5. Click "Create Web Service"
-
-**Cost**: Free tier available with automatic sleep after inactivity.
-
-### ~~Vercel~~ (Not Recommended)
-
-Vercel no longer supports Docker deployments in the free tier and is not suitable for long-running server applications like Rust/Axum. Use the platforms above instead.
-
-## Project Structure
-
-```
-website/
-├── Cargo.toml          # Rust dependencies
-├── Dockerfile          # Docker configuration
-├── vercel.json         # Vercel deployment config
-├── src/
-│   └── main.rs         # Axum server & routes
-├── templates/          # Tera HTML templates
-│   ├── base.html       # Base layout
-│   ├── index.html      # Home page
-│   ├── about.html      # About page
-│   ├── projects.html   # Projects showcase
-│   └── literary.html   # Literary works
-└── static/
-    ├── css/
-    │   └── style.css   # Stylesheet
-    ├── images/
-    └── fonts/
-```
+---
 
 ## Customization
 
-| Section | File |
-|---------|------|
-| Page content | Edit templates in `templates/` |
-| Styling | Modify `static/css/style.css` |
-| Routes | Add new routes in `src/main.rs` |
+| What | Where |
+| --- | --- |
+| Layout, nav, footer | `templates/base.html` |
+| Styles | `static/css/style.css` |
+| Adding a page | Create template → add to `scripts/build.js` |
+| Images | `static/images/` |
+
+---
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT

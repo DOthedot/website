@@ -20,7 +20,6 @@ const pages = [
   { template: 'literary.html', output: 'literary.html' },
   { template: 'phone_poem.html', output: 'literary/phone-poem.html' },
   { template: 'homework_machine.html', output: 'literary/homework-machine.html' },
-  { template: 'last_page_poem.html', output: 'literary/last-page.html' },
   { template: 'rain_poem.html', output: 'literary/when-the-rain.html' },
   { template: 'blog_relativity.html', output: 'blog/relativity.html' },
   { template: 'blog_quantum.html', output: 'blog/quantum.html' },

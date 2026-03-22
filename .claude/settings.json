@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm Dockerfile fly.toml railway.toml render.yaml Cargo.toml Cargo.lock)",
+      "Bash(rm -rf src/ target/)",
+      "Bash(rm -f /Users/dhananjayojha/Documents/projects/website/Dockerfile /Users/dhananjayojha/Documents/projects/website/fly.toml /Users/dhananjayojha/Documents/projects/website/railway.toml /Users/dhananjayojha/Documents/projects/website/render.yaml /Users/dhananjayojha/Documents/projects/website/Cargo.toml /Users/dhananjayojha/Documents/projects/website/Cargo.lock)",
+      "Bash(rm -rf /Users/dhananjayojha/Documents/projects/website/src/ /Users/dhananjayojha/Documents/projects/website/target/)",
+      "Bash(npm run:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\(''''description'''',''''''''\\)\\)\")",
+      "Bash(xargs sed:*)",
+      "WebFetch(domain:www.svgrepo.com)"
+    ]
+  }
+}
