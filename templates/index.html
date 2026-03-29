@@ -10,14 +10,11 @@
     exploit my physical powers in leisure time as a mma enthusiast, if you are not sure about what's that lets "ROLL"!!!
 </p>
 
-<h2>blogs</h2>
+<h2><a href="/literary" style="text-decoration: none;">blogs</a></h2>
 <ul class="blog-list">
-    <li><a href="/blog/relativity">Why Time Slows Down When You Move Fast</a></li>
-    <li><a href="/blog/quantum">The Weird World of Quantum Superposition</a></li>
-    <li><a href="/blog/entropy">Entropy: Why the Arrow of Time Points Forward</a></li>
-    <li><a href="/blog/black-holes">What Happens at the Edge of a Black Hole</a></li>
-    <li><a href="/blog/consciousness">Why It Feels Like We Are Conscious</a></li>
-    <li><a href="/blog/control">Control Is the Source of Freedom</a></li>
+    {% for blog in blogs %}
+    <li><span class="article-date">{{ blog.epoch }}, {{ blog.date }}</span> <a href="/blog/{{ blog.slug }}">{{ blog.title }}</a></li>
+    {% endfor %}
 </ul>
 
 <h2>quotes</h2>
@@ -48,6 +45,7 @@
         var el = document.getElementById('quote-text');
         var btn = document.getElementById('dice-btn');
         if (el && btn) {
+            el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
             btn.addEventListener('click', function () {
                 el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
             });
