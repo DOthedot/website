@@ -11,7 +11,7 @@ const STATIC_DIR = path.join(ROOT, 'static');
 nunjucks.configure(TEMPLATES_DIR, { autoescape: false });
 
 // Blog data with epoch timestamps (seconds since Dec 10, 1999 11:11)
-const EPOCH_BASE = new Date('1999-12-10T11:11:00').getTime();
+const EPOCH_BASE = new Date('1999-12-10T11:11:11').getTime();
 
 const blogs = [
   { epoch: 826001492, slug: 'relativity', title: 'Why Time Slows Down When You Move Fast' },
@@ -21,6 +21,7 @@ const blogs = [
   { epoch: 826450432, slug: 'consciousness', title: 'Why It Feels Like We Are Conscious' },
   { epoch: 827216051, slug: 'control', title: 'Control Is the Source of Freedom' },
   { epoch: 829442940, slug: 'participation', title: 'The Paradox of Participation' },
+  { epoch: 832550400, slug: 'hunting-shadows', title: 'Hunting Shadows' },
 ].map(b => {
   const d = new Date(EPOCH_BASE + b.epoch * 1000);
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -50,6 +51,7 @@ const pages = [
   { template: 'blog_consciousness.html', output: 'blog/consciousness.html' },
   { template: 'blog_control.html', output: 'blog/control.html' },
   { template: 'blog_participation.html', output: 'blog/participation.html' },
+  { template: 'blog_hunting_shadows.html', output: 'blog/hunting-shadows.html' },
 ];
 
 // Clean and recreate output directory

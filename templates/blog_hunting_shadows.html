@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Hunting Shadows — DOthedot{% endblock %}
+
+{% block header %}portfolio{% endblock %}
+
+{% block content %}
+<p><a href="/" id="back-link">← <span id="back-text">home</span></a></p>
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'literary') {
+        document.getElementById('back-link').href = '/literary';
+        document.getElementById('back-text').textContent = 'literary works';
+    }
+})();
+</script>
+<h2>Hunting Shadows</h2>
+<p class="article-date">832600129, Apr 28, 2026</p>
+<figure class="article-image article-image-bw">
+    <img src="https://static.scientificamerican.com/dam/m/677a5f135deb9e94/original/saw0525Crow_lead.jpg?m=1744058742.611&w=900" alt="Hunting Shadows" width="600" height="400">
+    <figcaption>Scientific American</figcaption>
+</figure>
+<p>Lets assume there is a monster in the room with you. It has nine dimensions. You have three. This is going to be an unfair fight right ? — not because the monster is stronger, but because you can't actually see it. You only see its shadow, and that shadow might be a liar.</p>
+<p>For a simpler analogy, if you look at a cone from above. You see a circle. Now let's reverse the question: hand me a circle and ask what made it. A cone? A sphere? An infinitely tall pencil seen from the top? You can't tell. The projection erased the height, the curvature, the volume. This is the curse of dimensionality reduction — and it is not just a math curiosity. It is the working condition of modern science.</p>
+<p>String theory proposes 10 or 11 dimensions, with the extra ones compactified — curled up too small for us to register. Quantum field theory describes particles as excitations of fields we never directly observe; we only ever see their projections in detectors. Even dark matter may be the shadow of physics happening on a brane next to ours. In every case, we are the flatlanders holding the circle, guessing at the cone.</p>
+<p>The clever escape route is to take multiple orthogonal projections and triangulate — the way CT scans rebuild a body from many flat X-rays, or how the Event Horizon Telescope assembled a black hole from radio shadows across the planet. It works. But against a 9D opponent, you'd need a lifetime of paper and still come up short.</p>
+<p>This is where neural networks get strange. A transformer operates in embedding spaces of 12,000+ dimensions. It doesn't fight the monster — it learns the latent manifold the monster lives on. AlphaFold reconstructs 3D protein geometry from 1D amino acid strings. Diffusion models hallucinate coherent images out of pure noise. These systems are routinely solving the inverse problem we evolved to fail at: recovering the higher-dimensional cause from the lower-dimensional shadow.</p>
+{% endblock %}
