@@ -22,6 +22,7 @@ const blogs = [
   { epoch: 827216051, slug: 'control', title: 'Control Is the Source of Freedom' },
   { epoch: 829442940, slug: 'participation', title: 'The Paradox of Participation' },
   { epoch: 832550400, slug: 'hunting-shadows', title: 'Hunting Shadows' },
+  { epoch: 836677129, slug: 'disturbs', title: 'Everything That Disturbs, Survives' },
 ].map(b => {
   const d = new Date(EPOCH_BASE + b.epoch * 1000);
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -52,6 +53,7 @@ const pages = [
   { template: 'blog_control.html', output: 'blog/control.html' },
   { template: 'blog_participation.html', output: 'blog/participation.html' },
   { template: 'blog_hunting_shadows.html', output: 'blog/hunting-shadows.html' },
+  { template: 'blog_disturbs.html', output: 'blog/disturbs.html' },
 ];
 
 // Clean and recreate output directory

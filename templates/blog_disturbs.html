@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Everything That Disturbs, Survives — DOthedot{% endblock %}
+
+{% block header %}portfolio{% endblock %}
+
+{% block content %}
+<p><a href="/" id="back-link">← <span id="back-text">home</span></a></p>
+<script>
+(function() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'literary') {
+        document.getElementById('back-link').href = '/literary';
+        document.getElementById('back-text').textContent = 'literary works';
+    }
+})();
+</script>
+<h2>Everything That Disturbs, Survives</h2>
+<p class="article-date">836677129, Jun 15, 2026</p>
+<figure class="article-image article-image-bw">
+    <img src="/static/images/disturbs.jpg" alt="Particle Shower" width="600" height="400">
+    <figcaption>Jody Rasch — From the Quantum to the Infinite (<a href="https://www.interaliamag.org/audiovisual/jody-rasch-from-the-quantum-to-the-infinite/" target="_blank" rel="noopener noreferrer">Interalia Magazine</a>)</figcaption>
+</figure>
+<p>Darwin's most quoted phrase hides a quiet contradiction. Survival of the fittest tells us the fittest survive. Ask who the fittest are, and the only honest answer is: those who survive. The phrase folds back on itself. Fitness and survival aren't cause and effect — they're a single measurement read from two directions. And the rule leaks. Fragile, rare, seemingly "unfit" organisms persist all the time, while robust ones vanish without warning. If the principle were truly about fitness, reality would be far tidier than it is.</p>
+<p>So perhaps survival was never a biological rule at all. Perhaps it's a physical one — older than life, older than cells, older than the planet that carries them.</p>
+<p>Start with the most basic unit there is: not an organism, but a disturbance. Treat information as a fluctuation in the fabric of space — a local change imposed on a field that already exists everywhere. Every such disturbance faces the same fate. The surrounding field pushes back. It wants to smooth the ripple away and return to equilibrium. A disturbance "survives" only if it can do one thing: impose its state on its neighbors faster than they can erase it. It has to propagate. It has to make the next region of space carry its pattern forward before it's forgotten.</p>
+<p>This isn't a metaphor loosely borrowed from physics. It's close to how physics already works. A particle is not a tiny ball of stuff; it's a stable, self-sustaining excitation of a field — a standing wave that holds its shape while endlessly perturbing everything around it. Give that wave momentum, and its influence spreads across more dimensions, reaching farther into the fabric. The particle endures not by being still, but by never once stopping its effect on what surrounds it. It persists by refusing to settle.</p>
+<p>Here is the inversion that follows. Fitness was never a property an object possesses. It's a capacity an object exercises — the capacity to change other states, and to keep being changed in return. To survive is to propagate. To propagate is to be fit. The fittest thing in any system — a particle, a gene, an idea, a civilization — is simply the disturbance most able to press itself onto its surroundings and resist being damped back into silence.</p>
+<p>Seen this way, Darwin described a single chapter of a much larger story. Life is just the universe's most elaborate technique for keeping a disturbance alive. Every existing thing is something that hasn't yet been smoothed away. Everything that lasts is something still, restlessly, rewriting whatever sits next to it.</p>
+<p>Survival, then, is not the reward for being fit. Survival is the act — the continuous, stubborn act of disturbing the world faster than the world can forget you.</p>
+<p>And maybe that's the only law that was ever really running underneath all the others.</p>
+{% endblock %}
