@@ -78,7 +78,10 @@ for (const page of pages) {
   console.log(`  ${page.template} → out/${page.output}`);
 }
 
-// Recursively copy a directory
+// Files that live in static/ for our benefit but must not be published.
+const SKIP_ASSET = /^\.DS_Store$|^Thumbs\.db$|\.md$/;
+
+// Recursively copy a directory, leaving developer-only files behind.
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
@@ -86,7 +89,7 @@ function copyDir(src, dest) {
     const destPath = path.join(dest, entry.name);
     if (entry.isDirectory()) {
       copyDir(srcPath, destPath);
-    } else {
+    } else if (!SKIP_ASSET.test(entry.name)) {
       fs.copyFileSync(srcPath, destPath);
     }
   }
