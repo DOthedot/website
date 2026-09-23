@@ -239,6 +239,23 @@ hr {
     }
 }
 
+/* Project listing on /projects — name reads as plain text, repo icon trails it. */
+.project-name {
+    text-decoration: none;
+    color: inherit;
+}
+
+.project-repo {
+    text-decoration: none;
+    margin-left: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.project-repo svg {
+    vertical-align: middle;
+}
+
 .article-date {
     font-size: 0.85rem;
     color: #666;

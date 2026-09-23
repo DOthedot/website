@@ -7,6 +7,8 @@ const OUT_DIR = path.join(ROOT, 'out');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 const STATIC_DIR = path.join(ROOT, 'static');
 
+const projects = require('../data/projects.js');
+
 // Configure nunjucks with the templates directory
 nunjucks.configure(TEMPLATES_DIR, { autoescape: false });
 
@@ -66,6 +68,7 @@ fs.mkdirSync(OUT_DIR, { recursive: true });
 const templateData = {
   'index.html': { blogs: top5Blogs },
   'literary.html': { blogs: blogsByEpoch },
+  'projects.html': { projects },
 };
 
 // Render all pages
