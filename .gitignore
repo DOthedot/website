@@ -1,36 +1,10 @@
-# Rust
-target/
+# Dependencies
+node_modules/
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Build output
+out/
 
-# Flask
-instance/
-.webassets-cache
-
-# IDE
+# Editors
 .vscode/
 .idea/
 *.swp
@@ -41,13 +15,9 @@ instance/
 .DS_Store
 Thumbs.db
 
-# Node
-node_modules/
-
-# Build output
-out/
+# Local tooling
+.playwright-mcp/
 
 # Environment variables
 .env
 .env.local
-
