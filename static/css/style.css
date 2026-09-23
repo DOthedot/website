@@ -161,17 +161,22 @@ hr {
     position: relative;
     border: 1px solid #333;
     padding: 1.4rem 1.25rem 1.5rem;
+    /* Stands in for the margin the section heading used to contribute. */
+    margin-top: 2.5rem;
 }
 
-/* Section label sitting in the top border, TUI-dialog style. */
+/* The section heading itself, set small and riding the top border the way a
+   terminal dialog titles its frame. Overrides the global h2 sizing. */
 .quotes-block .quotes-label {
     position: absolute;
     top: 0;
     left: 1.1rem;
     transform: translateY(-50%);
     background: #fff;
+    margin: 0;
     padding: 0 0.55ch;
     font-size: 0.85rem;
+    font-weight: 400;
     color: #666;
 }
 
