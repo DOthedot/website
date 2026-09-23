@@ -1,4 +1,5 @@
 const nunjucks = require('nunjucks');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -10,7 +11,20 @@ const STATIC_DIR = path.join(ROOT, 'static');
 const projects = require('../data/projects.js');
 
 // Configure nunjucks with the templates directory
-nunjucks.configure(TEMPLATES_DIR, { autoescape: false });
+const env = nunjucks.configure(TEMPLATES_DIR, { autoescape: false });
+
+// Stamp static assets with a hash of their contents, so a changed file gets a
+// new URL and browsers cannot serve a stale copy. Templates call this as
+// {{ asset('css/style.css') }}.
+const assetCache = new Map();
+env.addGlobal('asset', function asset(relPath) {
+  if (!assetCache.has(relPath)) {
+    const bytes = fs.readFileSync(path.join(STATIC_DIR, relPath));
+    const hash = crypto.createHash('sha1').update(bytes).digest('hex').slice(0, 8);
+    assetCache.set(relPath, `/static/${relPath}?v=${hash}`);
+  }
+  return assetCache.get(relPath);
+});
 
 // Blog data with epoch timestamps (seconds since Dec 10, 1999 11:11)
 const EPOCH_BASE = new Date('1999-12-10T11:11:11').getTime();
