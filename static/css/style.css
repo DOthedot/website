@@ -155,32 +155,88 @@ hr {
 }
 
 .quotes-block {
+    position: relative;
+    border: 1px solid #333;
+    padding: 1.4rem 1.25rem 1.5rem;
+}
+
+/* Section label sitting in the top border, TUI-dialog style. */
+.quotes-block .quotes-label {
+    position: absolute;
+    top: 0;
+    left: 1.1rem;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 0.55ch;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.quotes-block .quotes-row {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    background-color: #fafafa;
+    gap: 1.1rem;
+}
+
+.quotes-block .quotes-body {
+    flex: 1;
+    min-width: 0;
 }
 
 .quotes-block .quote-text {
-    flex: 1;
+    margin-bottom: 0.7rem;
+}
+
+.quotes-block .quote-attr {
     margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.quotes-block .quotes-rail {
+    align-self: stretch;
+    display: flex;
+    border-left: 1px solid #ddd;
+    padding-left: 1.1rem;
 }
 
 .quotes-block .dice-btn {
     flex-shrink: 0;
-    font-size: 1.5rem;
-    padding: 0.25rem 0.5rem;
+    width: 46px;
+    height: 46px;
+    padding: 6px;
     cursor: pointer;
     background: #fff;
     border: 1px solid #333;
-    border-radius: 4px;
-    transition: background 0.2s;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 2px;
+    transition: transform 0.45s cubic-bezier(0.3, 1.4, 0.5, 1);
 }
 
-.quotes-block .dice-btn:hover {
-    background: #eee;
+.quotes-block .dice-btn:focus-visible {
+    outline: 2px solid #333;
+    outline-offset: 3px;
+}
+
+.quotes-block .dice-pip {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #333;
+    align-self: center;
+    justify-self: center;
+    visibility: hidden;
+}
+
+.quotes-block .dice-pip.on {
+    visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .quotes-block .dice-btn {
+        transition: none;
+    }
 }
 
 .article-date {
@@ -239,6 +295,14 @@ hr {
     nav a {
         display: block;
         margin-bottom: 0.5rem;
+    }
+
+    .quotes-block .quotes-row {
+        gap: 0.85rem;
+    }
+
+    .quotes-block .quotes-rail {
+        padding-left: 0.85rem;
     }
 }
 

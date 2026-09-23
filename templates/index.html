@@ -19,8 +19,16 @@
 
 <h2>quotes</h2>
 <div class="quotes-block">
-    <p id="quote-text" class="quote-text">Click the dice to roll a quote.</p>
-    <button type="button" id="dice-btn" class="dice-btn" title="Roll a random quote">🎲</button>
+    <span class="quotes-label">quotes</span>
+    <div class="quotes-row">
+        <div class="quotes-body">
+            <p id="quote-text" class="quote-text">Roll the die for a quote.</p>
+            <p id="quote-attr" class="quote-attr"></p>
+        </div>
+        <div class="quotes-rail">
+            <button type="button" id="dice-btn" class="dice-btn" title="Roll a new quote" aria-label="Roll a new quote"></button>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -42,14 +50,60 @@
             "Today is victory over yourself of yesterday; tomorrow is your victory over lesser men. -Miyamoto Musashi, The Book of Five Rings",
             "You must understand that there is more than one path to the top of the mountain. -Miyamoto Musashi, The Book of Five Rings"
         ];
-        var el = document.getElementById('quote-text');
-        var btn = document.getElementById('dice-btn');
-        if (el && btn) {
-            el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-            btn.addEventListener('click', function () {
-                el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-            });
+        // Attribution is glued onto each quote with an inconsistent separator
+        // (em dash, hyphen, or hyphen with no space). Split on the LAST dash
+        // that follows whitespace so every entry parses.
+        function split(raw) {
+            var m = /^([\s\S]*\S)\s+[\u2014\u2013-]\s*([^\u2014\u2013]*)$/.exec(raw);
+            if (!m) return { text: raw, who: '' };
+            return { text: m[1], who: m[2].trim() };
         }
+
+        // Pip positions in a 3x3 grid, numbered left-to-right, top-to-bottom.
+        var FACES = { 1: [5], 2: [1, 9], 3: [1, 5, 9], 4: [1, 3, 7, 9], 5: [1, 3, 5, 7, 9], 6: [1, 3, 4, 6, 7, 9] };
+
+        var textEl = document.getElementById('quote-text');
+        var attrEl = document.getElementById('quote-attr');
+        var btn = document.getElementById('dice-btn');
+        if (!textEl || !attrEl || !btn) return;
+
+        var pips = [];
+        for (var i = 0; i < 9; i++) {
+            var pip = document.createElement('span');
+            pip.className = 'dice-pip';
+            btn.appendChild(pip);
+            pips.push(pip);
+        }
+
+        function showFace(n) {
+            var on = FACES[n];
+            for (var i = 0; i < 9; i++) {
+                pips[i].classList.toggle('on', on.indexOf(i + 1) !== -1);
+            }
+        }
+
+        var prev = null;
+        var spin = 0;
+
+        function roll() {
+            var q;
+            do {
+                q = quotes[Math.floor(Math.random() * quotes.length)];
+            } while (q === prev && quotes.length > 1);
+            prev = q;
+            var parts = split(q);
+            textEl.textContent = parts.text;
+            attrEl.textContent = parts.who ? '\u2014 ' + parts.who : '';
+            showFace(Math.floor(Math.random() * 6) + 1);
+        }
+
+        roll();
+
+        btn.addEventListener('click', function () {
+            spin += 405;
+            btn.style.transform = 'rotate(' + spin + 'deg)';
+            roll();
+        });
     })();
 </script>
 {% endblock %}
