@@ -313,11 +313,11 @@ hr {
 }
 
 .form-status-success {
-    color: green;
+    color: #1a7f37;
 }
 
 .form-status-error {
-    color: red;
+    color: #b3261e;
 }
 
 .article-date {
