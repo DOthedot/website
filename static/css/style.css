@@ -1,12 +1,15 @@
 /* Minimalist Monospace Website Styles */
-/* JetBrains Mono Nerd Font Mono Regular – place font file in static/fonts/ (see README in that folder) */
 
+/* The TTF is 2.4MB, so font-display: swap renders the page immediately in a
+   fallback monospace and swaps once the file arrives, rather than holding the
+   text invisible. Only the .ttf is listed because no .woff2 build is shipped;
+   naming one that does not exist costs every visitor a 404. */
 @font-face {
     font-family: 'JetBrainsMono Nerd Font Mono';
     font-style: normal;
     font-weight: 400;
-    src: url('/static/fonts/JetBrainsMonoNerdFont-Regular.woff2') format('woff2'),
-         url('/static/fonts/JetBrainsMonoNerdFont-Regular.ttf') format('truetype');
+    font-display: swap;
+    src: url('/static/fonts/JetBrainsMonoNerdFont-Regular.ttf') format('truetype');
 }
 
 * {
