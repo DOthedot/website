@@ -5,13 +5,13 @@
 {% block header %}about{% endblock %}
 
 {% block content %}
-<div style="position: relative; padding-bottom: 20px;">
+<div class="about-page">
     <h2>about me</h2>
     <p>Hey, i come from bhilwara, rajasthan, india. I believe in creating net +ve impact on the world.</p>
     <p>other than that i love reading about "EVERYTHING" </p>
     <p>here's a haiku about me : "took the road , waiting for breath to walk again"</p>
     <figure class="article-image">
-        <img src="/static/images/about_me.jpg" alt="Come quando eravamo piccoli" style="width: 100%; height: auto;">
+        <img src="/static/images/about_me.jpg" alt="Come quando eravamo piccoli">
         <figcaption>Come quando eravamo piccoli — Elena Di Palma (<a
                 href="https://illustratorscontest.tapirulan.it" target="_blank"
                 rel="noopener noreferrer">Tapirulan</a>)</figcaption>
@@ -37,13 +37,11 @@
         computer science and technology.
     </p>
 
-    <p style="text-align: center;"><a href="/thought-for-century">→ thought for the century ←</a></p>
+    <p class="center-link"><a href="/thought-for-century">→ thought for the century ←</a></p>
 
-    <img src="/static/images/cat_sama_interaction.png" alt="Interaction Cat"
-        style="position: absolute; bottom: -40px; right: 60px; width: 100px; height: auto; opacity: 0.9; z-index: 101; filter: grayscale(100%); transform: rotate(-5deg);">
+    <img src="/static/images/cat_sama_interaction.png" alt="Interaction Cat" class="about-cat about-cat-thinking">
     <a href="/contact">
-        <img src="/static/images/cat_samurai.png" alt="Samurai Cat"
-            style="position: absolute; bottom: 0; right: 0; width: 80px; height: auto; opacity: 0.8; z-index: 102;">
+        <img src="/static/images/cat_samurai.png" alt="Samurai Cat" class="about-cat about-cat-samurai">
     </a>
 </div>
 {% endblock %}
