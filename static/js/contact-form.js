@@ -18,8 +18,8 @@
     var label = btn ? btn.textContent : '';
 
     function settle(ok) {
-        if (success) success.style.display = ok ? 'block' : 'none';
-        if (error) error.style.display = ok ? 'none' : 'block';
+        if (success) success.classList.toggle('is-visible', ok);
+        if (error) error.classList.toggle('is-visible', !ok);
         if (btn) {
             btn.textContent = label;
             btn.disabled = false;

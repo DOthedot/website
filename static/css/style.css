@@ -256,6 +256,70 @@ hr {
     vertical-align: middle;
 }
 
+/* Contact form. Inputs borrow the page's own ink via currentColor. */
+.contact-form {
+    max-width: 500px;
+    margin-top: 2rem;
+}
+
+.form-field {
+    margin-bottom: 1rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    font-family: inherit;
+}
+
+.form-submit {
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.form-fallback {
+    margin-top: 1rem;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.form-fallback a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hidden until contact-form.js reports the outcome of a submission. */
+.form-status {
+    margin-top: 1rem;
+    display: none;
+}
+
+.form-status.is-visible {
+    display: block;
+}
+
+.form-status-success {
+    color: green;
+}
+
+.form-status-error {
+    color: red;
+}
+
 .article-date {
     font-size: 0.85rem;
     color: #666;
