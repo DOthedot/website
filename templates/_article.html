@@ -1,0 +1,14 @@
+{# Layout for blog posts: a back link that knows where the reader came from,
+   then the post body. Posts extend this and fill the `article` block. #}
+{% extends "base.html" %}
+
+{% block header %}portfolio{% endblock %}
+
+{% block content %}
+<p><a href="/" id="back-link">← <span id="back-text">home</span></a></p>
+{% block article %}{% endblock %}
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/back-link.js" defer></script>
+{% endblock %}

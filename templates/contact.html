@@ -41,37 +41,9 @@
 <p id="form-success" style="margin-top: 1rem; color: green; display: none;">Message sent successfully! I'll get back to you soon.</p>
 <p id="form-error" style="margin-top: 1rem; color: red; display: none;">Something went wrong. Please try the Google Form link above.</p>
 
-<script>
-(function() {
-    var form = document.getElementById('contact-form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var btn = document.getElementById('submit-btn');
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
 
-        var data = new URLSearchParams();
-        data.append('entry.1042344079', form.name.value);
-        data.append('entry.979343976', form.email.value);
-        data.append('entry.1793433401', form.message.value);
+{% endblock %}
 
-        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfjjd0slqYgPp5lssr1wdYn0_Ryr-ZRS07vaGvV621HSJg0_g/formResponse', {
-            method: 'POST',
-            body: data,
-            mode: 'no-cors'
-        }).then(function() {
-            document.getElementById('form-success').style.display = 'block';
-            document.getElementById('form-error').style.display = 'none';
-            form.reset();
-            btn.textContent = 'Send Message →';
-            btn.disabled = false;
-        }).catch(function() {
-            document.getElementById('form-error').style.display = 'block';
-            btn.textContent = 'Send Message →';
-            btn.disabled = false;
-        });
-    });
-})();
-</script>
-
+{% block scripts %}
+<script src="/static/js/contact-form.js" defer></script>
 {% endblock %}
