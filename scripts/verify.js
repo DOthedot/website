@@ -61,6 +61,26 @@ for (const file of htmlFiles) {
   }
 }
 
+// A script from an origin the CSP's script-src doesn't list is silently
+// blocked by the browser, so every external <script src> must be allowed.
+const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
+const csp = vercel.headers
+  .flatMap(h => h.headers)
+  .find(h => h.key === 'Content-Security-Policy').value;
+const scriptSrc = csp.split(';').map(d => d.trim().split(/\s+/))
+  .find(([name]) => name === 'script-src').slice(1);
+
+const SCRIPT = /<script\b[^>]*\bsrc="(https?:\/\/[^"]+)"/g;
+const blocked = new Set();
+for (const file of htmlFiles) {
+  const html = fs.readFileSync(path.join(OUT_DIR, file), 'utf8');
+  let m;
+  while ((m = SCRIPT.exec(html)) !== null) {
+    const origin = new URL(m[1]).origin;
+    if (!scriptSrc.includes(origin)) blocked.add(`${file} → ${origin}`);
+  }
+}
+
 // Files that should never reach production.
 const junk = [...allFiles].filter(f => /(^|\/)\.DS_Store$|\.md$/.test(f));
 
@@ -75,5 +95,10 @@ if (junk.length) {
   for (const j of junk) console.error(`  out/${j}`);
 }
 
-if (problems.length || junk.length) process.exit(1);
+if (blocked.size) {
+  console.error(`\nverify: ${blocked.size} script origin(s) missing from CSP script-src:`);
+  for (const b of blocked) console.error(`  ${b}`);
+}
+
+if (problems.length || junk.length || blocked.size) process.exit(1);
 console.log('verify: OK');
