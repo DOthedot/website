@@ -2,7 +2,7 @@
 
 A minimalist personal portfolio and writing space. Built with a focus on content over complexity — clean monospace typography, zero JavaScript frameworks, and a static build pipeline that deploys in seconds.
 
-**Live site**: [dothedot.vercel.app](https://dothedot.vercel.app)
+**Live site**: [dothedot.com](https://dothedot.com)
 
 ---
 
