@@ -31,9 +31,9 @@ const EPOCH_BASE = new Date('1999-12-10T11:11:11').getTime();
 
 const blogs = [
   { epoch: 826001492, slug: 'relativity', title: 'Why Time Slows Down When You Move Fast' },
-  { epoch: 826001492, slug: 'quantum', title: 'The Weird World of Quantum Superposition' },
-  { epoch: 826001492, slug: 'entropy', title: 'Entropy: Why the Arrow of Time Points Forward' },
-  { epoch: 826001492, slug: 'black-holes', title: 'What Happens at the Edge of a Black Hole' },
+  { epoch: 824100692, slug: 'quantum', title: 'The Weird World of Quantum Superposition' },
+  { epoch: 820558292, slug: 'entropy', title: 'Entropy: Why the Arrow of Time Points Forward' },
+  { epoch: 818052692, slug: 'black-holes', title: 'What Happens at the Edge of a Black Hole' },
   { epoch: 826450432, slug: 'consciousness', title: 'Why It Feels Like We Are Conscious' },
   { epoch: 827216051, slug: 'control', title: 'Control Is the Source of Freedom' },
   { epoch: 829442940, slug: 'participation', title: 'The Paradox of Participation' },
