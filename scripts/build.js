@@ -62,6 +62,7 @@ const pages = [
   { template: 'phone_poem.html', output: 'literary/phone-poem.html' },
   { template: 'homework_machine.html', output: 'literary/homework-machine.html' },
   { template: 'rain_poem.html', output: 'literary/when-the-rain.html' },
+  { template: 'till_dawn_poem.html', output: 'literary/till-dawn.html' },
   { template: 'blog_relativity.html', output: 'blog/relativity.html' },
   { template: 'blog_quantum.html', output: 'blog/quantum.html' },
   { template: 'blog_entropy.html', output: 'blog/entropy.html' },
