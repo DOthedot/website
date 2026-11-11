@@ -70,14 +70,39 @@ const csp = vercel.headers
 const scriptSrc = csp.split(';').map(d => d.trim().split(/\s+/))
   .find(([name]) => name === 'script-src').slice(1);
 
-const SCRIPT = /<script\b[^>]*\bsrc="(https?:\/\/[^"]+)"/g;
+// A whole <script …> opening tag; quoted values may themselves contain ">".
+const SCRIPT_TAG = /<script\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi;
+// One attribute: a name, then optionally = and a double-, single- or unquoted
+// value. Matching attributes in sequence consumes each value whole, so text
+// inside a value (a stray `src=` or `async`) can never pass for an attribute.
+const ATTR = /\s([^\s"'=<>/]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?/g;
+
+function externalScript(tag) {
+  const attrs = new Map();
+  for (const [, name, dq, sq, bare] of tag.matchAll(ATTR)) {
+    const key = name.toLowerCase();
+    // Browsers keep the first of a duplicated attribute.
+    if (!attrs.has(key)) attrs.set(key, dq ?? sq ?? bare ?? '');
+  }
+  const src = attrs.get('src');
+  if (!src || !/^https?:\/\//i.test(src)) return null;
+  return { src, isAsync: attrs.has('async') };
+}
+
 const blocked = new Set();
+// Deferred scripts run in document order, so an external script marked defer
+// makes the site's own deferred scripts wait for a third-party download.
+// External scripts must be async so they never hold up first-party JS.
+const notAsync = new Set();
 for (const file of htmlFiles) {
   const html = fs.readFileSync(path.join(OUT_DIR, file), 'utf8');
-  let m;
-  while ((m = SCRIPT.exec(html)) !== null) {
-    const origin = new URL(m[1]).origin;
+  for (const [tag] of html.matchAll(SCRIPT_TAG)) {
+    const script = externalScript(tag);
+    if (!script) continue;
+    const origin = new URL(script.src).origin;
     if (!scriptSrc.includes(origin)) blocked.add(`${file} → ${origin}`);
+    // Deduped by src: every page shares base.html, so per-page lines are noise.
+    if (!script.isAsync) notAsync.add(script.src);
   }
 }
 
@@ -100,5 +125,10 @@ if (blocked.size) {
   for (const b of blocked) console.error(`  ${b}`);
 }
 
-if (problems.length || junk.length || blocked.size) process.exit(1);
+if (notAsync.size) {
+  console.error(`\nverify: ${notAsync.size} external script(s) not loaded async:`);
+  for (const s of notAsync) console.error(`  ${s}`);
+}
+
+if (problems.length || junk.length || blocked.size || notAsync.size) process.exit(1);
 console.log('verify: OK');
