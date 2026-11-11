@@ -18,6 +18,10 @@
     var label = btn ? btn.textContent : '';
 
     function settle(ok) {
+        // Count the outcome in Umami. "sent" means the request left the browser
+        // (see above), not that Google recorded it. window.umami is missing when
+        // an ad-blocker or Do Not Track stops the tracker; the form works anyway.
+        if (window.umami) window.umami.track(ok ? 'contact-sent' : 'contact-failed');
         if (success) success.classList.toggle('is-visible', ok);
         if (error) error.classList.toggle('is-visible', !ok);
         if (btn) {
